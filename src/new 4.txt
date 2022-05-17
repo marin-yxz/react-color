@@ -1,0 +1,52 @@
+import styled from 'styled-components';
+
+export const List = styled.li`
+  overflow-x: hidden;
+  overflow-y: auto;
+`;
+
+export const ListDiv = styled.div`
+  max-height: 300px;
+  max-width: 200px;
+`;
+export const ListDiv2 = styled.div`
+  overflow: auto;
+  max-height: 200px;
+  max-width: 500px;
+`;
+
+export const SearchBar = styled.input`
+  height: 50px;
+  width: 180px;
+`;
+export const Full = styled.div`
+  height: 100vh;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  background-color: grey;
+`;
+export const MainDiv = styled.div`
+  /* margin: auto;
+  flex: center;
+  max-width: 250px;
+
+  word-wrap: break-word; */
+
+  height: 100vh;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+`;

@@ -1,0 +1,88 @@
+import './App.css';
+import { StrictMode, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { List, ListDiv, ListDiv2, MainDiv, SearchBar } from './styled';
+
+function App() {
+  const [something, setSomething] = useState([]);
+  const [search, setSearch] = useState('');
+  const Img1 = styled.img`
+    height: 200px;
+    width: 200px;
+  `;
+  const Button = styled.button``;
+  let content;
+  useEffect(() => {
+    fetch11();
+  }, []);
+  function receive() {
+    content = something
+      .filter((search1) => {
+        if (search === '') {
+          return search1;
+        } else if (search1.name.toLowerCase().includes(search.toLowerCase())) {
+          console.log(search.href);
+          return search1;
+        }
+      })
+      .map((image) => {
+        return (
+          <List
+            style={{}}
+            onClick={() => {
+              console.log(image.prototype);
+              console.log(image.styles);
+            }}
+          >
+            <Button
+              onMouseEnter={() => setSomething(true)}
+              onMouseLeave={() => (image.prototype = false)}
+            >
+              {image.name}
+            </Button>
+            {image.prototype && (
+              <Img1 src={image.blank} alt={image.name}></Img1>
+            )}
+          </List>
+        );
+      });
+  }
+  const url = 'https://api.memegen.link/templates';
+  const fetch11 = async () => {
+    await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((receievedData) => setSomething(receievedData));
+  };
+
+  console.log(something);
+  receive();
+  return (
+    <>
+      <StrictMode>
+        <MainDiv>
+          <ListDiv2>
+            {' '}
+            <SearchBar
+              type="text"
+              placeholder="search"
+              onChange={(event) => {
+                setSearch(event.target.value);
+              }}
+            ></SearchBar>
+          </ListDiv2>
+          <ListDiv>
+            <ul>{content}</ul>
+          </ListDiv>
+          <div className="App"></div>;
+        </MainDiv>
+      </StrictMode>
+    </>
+  );
+}
+
+export default App;

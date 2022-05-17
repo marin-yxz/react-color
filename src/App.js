@@ -1,69 +1,117 @@
 import './App.css';
 import randomColor from 'randomcolor';
 import { useState } from 'react';
-
-function Randomcol(hue, lum) {
-  console.log(hue, lum);
-  const color = randomColor({
-    hue: hue,
-    luminosity: lum,
-  });
-  return color;
-}
+import Randomcol from './functions';
+import {
+  BoxColored,
+  Button,
+  DivBox,
+  DivMain,
+  DivMain1,
+  H1,
+  H2,
+  ImageDiv,
+  Input,
+} from './styled.js';
 
 function App() {
   const [color, setColor] = useState(randomColor);
   const [hue, setHue] = useState('');
   const [lumo, setlumo] = useState('');
+  const [counter, setCounter] = useState(0);
+  const [display, setDisplay] = useState('hidden');
+  const [true1, setTrue1] = useState(false);
   return (
-    <div>
-      <div
-        className="App"
+    <>
+      <H1>color picker and randomizer.</H1>
+
+      <DivMain
         style={{
-          transition: 'background-color 5s ease',
-          backgroundColor: color,
-          color: 'white',
-          height: '200px',
+          borderStyle: !true1 ? `solid` : `none`,
         }}
       >
-        <h1>
-          <button
-            onClick={() => {
-              setColor(Randomcol());
+        <ImageDiv
+          style={{
+            backgroundColor: color,
+            transition: 'all 1s ease',
+            WebkitTransition: 'all 1s ease',
+            MozTransition: 'all 1s ease',
+            opacity: '50%',
+            display: !true1 ? `` : `none`,
+          }}
+        />
+        <BoxColored
+          className="App"
+          style={{
+            backgroundColor: color,
+            transition: 'all 1s ease',
+            WebkitTransition: 'all 1s ease',
+            MozTransition: 'all 1s ease',
+            display: !true1 ? `` : `none`,
+          }}
+        >
+          <H2
+            style={{
+              display: !true1 ? `` : `none`,
             }}
           >
-            Generate
-          </button>
-        </h1>
-        <h2>Color generated:{color}</h2>
-        <h2>
-          <input
-            placeholder="hue"
-            value={hue}
-            onChange={(event) => {
-              setHue(event.currentTarget.value);
-              Randomcol(hue, lumo);
-            }}
-          />
-          <input
-            placeholder="luminosity"
-            value={lumo}
-            onChange={(event) => {
-              setlumo(event.currentTarget.value);
+            Color generated:{color}
+          </H2>
+        </BoxColored>
 
-              Randomcol(hue, lumo);
-            }}
-          />
-          <button
-            onClick={() => {
-              setColor(Randomcol(hue, lumo));
-            }}
-          >
-            Generate specified color
-          </button>
-        </h2>
-      </div>
-    </div>
+        <Input
+          placeholder="hue"
+          value={hue}
+          onChange={(event) => {
+            setHue(event.currentTarget.value);
+            Randomcol(hue, lumo);
+          }}
+          style={{
+            display: !true1 ? `` : `none`,
+          }}
+        />
+
+        <Input
+          placeholder="luminosity"
+          value={lumo}
+          onChange={(event) => {
+            setlumo(event.currentTarget.value);
+
+            Randomcol(hue, lumo);
+          }}
+          style={{
+            display: !true1 ? `` : `none`,
+          }}
+        />
+
+        <Button
+          onClick={() => {
+            setCounter(counter + 1);
+            setColor(Randomcol(hue, lumo));
+          }}
+          style={{ display: !true1 ? `` : `none` }}
+        >
+          Generate
+        </Button>
+        <DivMain1
+          style={{
+            visibility: display !== 'hidden' ? `visible` : `${display}`,
+          }}
+        >
+          {' '}
+          <DivBox></DivBox>
+        </DivMain1>
+        <Button
+          onClick={() => {
+            setTrue1(!true1);
+            setDisplay(true1 ? 'hidden' : 'visible');
+            console.log(display);
+          }}
+        >
+          Show Box
+        </Button>
+      </DivMain>
+    </>
   );
 }
 
